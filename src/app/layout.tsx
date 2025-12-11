@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { VisualEditsMessenger } from "orchids-visual-edits";
+import { ScrollToTop } from "@/components/scroll-to-top";
 
 const jetbrainsMono = JetBrains_Mono({
   variable: "--font-mono",
@@ -25,6 +26,7 @@ export default function RootLayout({
         className={`${jetbrainsMono.variable} antialiased`}
       >
         {children}
+        <ScrollToTop />
         <VisualEditsMessenger />
       </body>
     </html>
