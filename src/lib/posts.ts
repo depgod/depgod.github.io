@@ -63,7 +63,7 @@ export function getAllPosts(): Post[] {
         slug,
         title: (data.title as string) || slug,
         date: (data.date as string) || new Date().toISOString().split('T')[0],
-        excerpt: (data.excerpt as string) || '',
+        excerpt: (data.excerpt as string) || (data.summary as string) || '',
         content: content,
         tags: (data.tags as string[]) || [],
       } as Post;
@@ -86,7 +86,7 @@ export function getPostBySlug(slug: string): Post | undefined {
     slug,
     title: (data.title as string) || slug,
     date: (data.date as string) || new Date().toISOString().split('T')[0],
-    excerpt: (data.excerpt as string) || '',
+    excerpt: (data.excerpt as string) || (data.summary as string) || '',
     content: content,
     tags: (data.tags as string[]) || [],
   } as Post;
