@@ -37,6 +37,11 @@ function parseFrontmatter(fileContent: string): { data: Record<string, unknown>;
       value = value.slice(1, -1).split(',').map(v => v.trim().replace(/^["']|["']$/g, ''));
     }
     
+    // Convert tags to array if it's a plain string
+    if (key === 'tags' && typeof value === 'string' && !Array.isArray(value)) {
+      value = value ? [value] : [];
+    }
+    
     data[key] = value;
   }
 
