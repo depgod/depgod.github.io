@@ -7,7 +7,7 @@ export default function Home() {
   return (
     <main className="min-h-screen px-6 py-16 md:py-24">
       <div className="mx-auto max-w-2xl">
-        <header className="mb-16 animate-in">
+        <header className="mb-6 animate-in">
           <div className="flex items-center gap-2 mb-4 text-[var(--fg-muted)] text-sm">
             <span className="text-[var(--accent)]">$</span>
             <span>cat ~/journal/README.md</span>
