@@ -96,3 +96,17 @@ export function getPostBySlug(slug: string): Post | undefined {
     tags: (data.tags as string[]) || [],
   } as Post;
 }
+
+export function getPaginatedPosts(page: number = 1, limit: number = 5): { posts: Post[]; totalPages: number; totalPosts: number } {
+  const allPosts = getAllPosts();
+  const totalPosts = allPosts.length;
+  const totalPages = Math.ceil(totalPosts / limit);
+  const start = (page - 1) * limit;
+  const posts = allPosts.slice(start, start + limit);
+  
+  return { posts, totalPages, totalPosts };
+}
+
+export function getRecentPosts(limit: number = 5): Post[] {
+  return getAllPosts().slice(0, limit);
+}

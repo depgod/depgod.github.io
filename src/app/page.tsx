@@ -1,8 +1,9 @@
 import Link from "next/link";
-import { getAllPosts } from "@/lib/posts";
+import { getRecentPosts, getAllPosts } from "@/lib/posts";
 
 export default function Home() {
-  const posts = getAllPosts();
+  const posts = getRecentPosts(5);
+  const totalPosts = getAllPosts().length;
 
   return (
     <main className="min-h-screen px-6 py-16 md:py-24">
@@ -75,6 +76,11 @@ export default function Home() {
               </Link>
             </li>
             <li className="m-0">
+              <Link href="/posts" className="text-[var(--fg-muted)] hover:text-[var(--accent)]">
+                ./all-posts
+              </Link>
+            </li>
+            <li className="m-0">
               <Link href="/about" className="text-[var(--fg-muted)] hover:text-[var(--accent)]">
                 ./about
               </Link>
@@ -88,6 +94,14 @@ export default function Home() {
         </nav>
 
         <section>
+          <div className="flex items-center justify-between mb-6 animate-in stagger-2">
+            <h2 className="text-sm text-[var(--fg-muted)] font-mono">
+              <span className="text-[var(--accent-tertiary)]">#</span> Recent posts
+            </h2>
+            <span className="text-xs text-[var(--fg-muted)] opacity-60">
+              {totalPosts} total
+            </span>
+          </div>
           <ul className="list-none p-0 space-y-6">
             {posts.map((post, i) => (
               <li 
@@ -120,6 +134,18 @@ export default function Home() {
               </li>
             ))}
           </ul>
+
+          {totalPosts > 5 && (
+            <div className="mt-8 text-center animate-in stagger-5">
+              <Link
+                href="/posts"
+                className="inline-flex items-center gap-2 px-5 py-2.5 text-sm rounded-lg bg-[var(--code-bg)] border border-[var(--border)] text-[var(--fg-muted)] hover:border-[var(--accent)] hover:text-[var(--accent)] hover:shadow-[0_0_20px_var(--glow)] transition-all duration-300"
+              >
+                View all {totalPosts} posts
+                <span className="text-[var(--accent)]">→</span>
+              </Link>
+            </div>
+          )}
         </section>
 
         <footer className="mt-20 pt-8 border-t border-[var(--border)] animate-in stagger-5">
