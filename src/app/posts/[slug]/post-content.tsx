@@ -28,10 +28,25 @@ function parseMarkdown(content: string): string {
     return placeholder;
   });
 
+  // Parse horizontal rules (must be on its own line with optional whitespace)
+  html = html.replace(/^---+$/gm, '<hr />');
+
   // Now process other markdown (headings won't affect code blocks)
   html = html.replace(/^### (.+)$/gm, '<h3>$1</h3>');
   html = html.replace(/^## (.+)$/gm, '<h2>$1</h2>');
   html = html.replace(/^# (.+)$/gm, '<h1>$1</h1>');
+
+  // Parse images: ![alt text](url)
+  html = html.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<img src="$2" alt="$1" loading="lazy" />');
+
+  // Parse links: [text](url) - internal links don't open in new tab
+  html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (_, text, url) => {
+    const isInternal = url.startsWith('/') || url.startsWith('#');
+    if (isInternal) {
+      return `<a href="${url}">${text}</a>`;
+    }
+    return `<a href="${url}" target="_blank" rel="noopener noreferrer">${text}</a>`;
+  });
 
   html = html.replace(/`([^`]+)`/g, '<code>$1</code>');
 

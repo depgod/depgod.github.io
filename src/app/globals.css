@@ -206,6 +206,16 @@ strong {
   margin-top: 1.5rem;
 }
 
+.prose h1 {
+  font-size: 1.5rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  background: linear-gradient(135deg, var(--accent), var(--accent-tertiary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
 .prose h2 {
   font-size: 1.3rem;
   margin-top: 2.5rem;
@@ -223,14 +233,112 @@ strong {
   margin-top: 1rem;
 }
 
+.prose li {
+  line-height: 1.8;
+}
+
+.prose li code {
+  font-size: 0.85em;
+}
+
 .prose blockquote {
   margin-top: 1.5rem;
   margin-bottom: 1.5rem;
 }
 
+.prose blockquote p {
+  margin: 0;
+}
+
 .prose pre {
   margin-top: 1.5rem;
   margin-bottom: 1.5rem;
+}
+
+/* Table Styles */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  font-size: 0.85rem;
+  overflow-x: auto;
+  display: block;
+}
+
+thead {
+  background: var(--border);
+  border-bottom: 2px solid var(--accent);
+}
+
+th {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  font-weight: 600;
+  color: var(--accent);
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+
+tbody tr {
+  border-bottom: 1px solid var(--border);
+  transition: all 0.2s ease;
+}
+
+tbody tr:hover {
+  background: rgba(0, 255, 159, 0.05);
+  box-shadow: inset 0 0 20px var(--glow);
+}
+
+td {
+  padding: 0.75rem 1rem;
+  vertical-align: top;
+  color: var(--fg);
+}
+
+td:first-child {
+  color: var(--accent-tertiary);
+  font-weight: 500;
+}
+
+.prose table {
+  max-width: none;
+}
+
+/* Horizontal rule in prose */
+.prose hr {
+  margin: 2.5rem 0;
+  border-top: 1px solid var(--border);
+  position: relative;
+}
+
+.prose hr::after {
+  content: '§';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--bg);
+  padding: 0 0.75rem;
+  color: var(--fg-muted);
+  font-size: 0.75rem;
+}
+
+/* Image Styles */
+.prose img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  margin: 1.5rem 0;
+  display: block;
+  box-shadow: 0 0 30px rgba(0, 255, 159, 0.05);
+}
+
+.prose img:hover {
+  box-shadow: 0 0 30px var(--glow);
+  border-color: var(--accent);
 }
 
 /* Prism.js Neon Syntax Theme */
@@ -349,6 +457,9 @@ pre.language-sql::before { content: 'sql'; }
 pre.language-go::before { content: 'go'; }
 pre.language-rust::before { content: 'rust'; }
 pre.language-markdown::before { content: 'md'; }
+pre.language-hcl::before { content: 'hcl'; }
+pre.language-dockerfile::before { content: 'dockerfile'; }
+pre.language-promql::before { content: 'promql'; }
 pre.language-plaintext::before { content: ''; }
 @keyframes fadeIn {
   from {
